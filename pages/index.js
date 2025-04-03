@@ -19,20 +19,20 @@ export default function Home() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
-  // Access the environment variable
+  // Access the environment variable for the API URL
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (!apiUrl) {
-        setError("API URL is not defined");
-        return;
-      }
+    if (!apiUrl) {
+      setError("API URL is not defined");
+      return;
+    }
 
+    const fetchData = async () => {
       try {
         const response = await fetch(`${apiUrl}/data`);
-        console.log('API Response:', response);
-
+        
+        // Check if the response is valid before attempting to access properties
         if (!response.ok) {
           throw new Error(`API call failed with status: ${response.status}`);
         }
@@ -44,6 +44,7 @@ export default function Home() {
         setError(error.message);
       }
     };
+
     fetchData();
   }, [apiUrl]);
 
@@ -91,7 +92,7 @@ export default function Home() {
       {/* Display the fetched data */}
       {data && (
         <div className="text-center mt-4">
-          <h2>Data:</h2>
+          <h2>Fetched Data:</h2>
           <pre>{JSON.stringify(data, null, 2)}</pre>
         </div>
       )}
