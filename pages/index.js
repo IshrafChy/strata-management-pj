@@ -41,7 +41,7 @@ export default function Home() {
         setData(json);
       } catch (error) {
         console.error("Error fetching data:", error);
-        setError(error.message);
+        setError(error.message); // Store the error message in the state
       }
     };
 
