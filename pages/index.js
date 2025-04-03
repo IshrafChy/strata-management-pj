@@ -1,9 +1,9 @@
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from '../components/Navbar';
-import styles from '../styles/Home.module.css'; // Ensure this import is correct
-import { useEffect, useState } from "react";
+import styles from '../styles/Home.module.css';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,6 +24,11 @@ export default function Home() {
 
   useEffect(() => {
     const fetchData = async () => {
+      if (!apiUrl) {
+        setError("API URL is not defined");
+        return;
+      }
+
       try {
         const response = await fetch(`${apiUrl}/data`);
         console.log('API Response:', response);
@@ -86,7 +91,7 @@ export default function Home() {
       {/* Display the fetched data */}
       {data && (
         <div className="text-center mt-4">
-          <h2>Alu: </h2>
+          <h2>Data:</h2>
           <pre>{JSON.stringify(data, null, 2)}</pre>
         </div>
       )}
