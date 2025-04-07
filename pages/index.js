@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from 'react';
 import Image from "next/image";
 import Link from "next/link";
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "../components/Navbar";
 import styles from "../styles/Home.module.css";
 
+// Google fonts
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -15,14 +16,21 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export default function Home() {
+const Home = () => {
+  // Hooks are always called here
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // Access the environment variable for the API URL
+  const [isClient, setIsClient] = useState(false); // This will only handle client-side rendering
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
+  // We use useEffect to set isClient to true only on the client side
+  useEffect(() => {
+    setIsClient(true); // Set to true when mounted on the client-side
+  }, []);
+
+  // Ensure the hooks are not called conditionally
   useEffect(() => {
     if (!apiUrl) {
       setError("API URL is not defined");
@@ -32,29 +40,24 @@ export default function Home() {
     const fetchData = async () => {
       try {
         const response = await fetch(`${apiUrl}/data`);
-        
-        // Check if the response is valid before attempting to access properties
         if (!response.ok) {
           throw new Error(`API call failed with status: ${response.status}`);
         }
-
         const json = await response.json();
         setData(json);
       } catch (error) {
         console.error("Error fetching data:", error);
-        setError(error.message); // Store the error message in the state
+        setError(error.message); 
       }
     };
 
     fetchData();
   }, [apiUrl]);
 
-  // Toggle dark mode
   const toggleDarkMode = () => {
     setIsDarkMode((prevMode) => !prevMode);
   };
 
-  // Apply dark mode class to body
   useEffect(() => {
     if (isDarkMode) {
       document.body.classList.add("dark-mode");
@@ -64,6 +67,11 @@ export default function Home() {
       document.body.classList.remove("dark-mode");
     }
   }, [isDarkMode]);
+
+  // Only render the component once it's mounted on the client
+  if (!isClient) {
+    return null;  // Avoid rendering on the server
+  }
 
   return (
     <div className="bg-gray-900 text-white">
@@ -75,21 +83,21 @@ export default function Home() {
           className={`flex flex-col sm:flex-row items-center justify-between w-full row-start-2 ${styles.container}`}
         >
           <div className="flex flex-col gap-8 sm:w-1/2">
-            <h1 className={styles.title}>Building Management</h1>
-            <h2 className={styles.subtitle}>Welcome to our management application</h2>
-            <p className={styles.paragraph}>
+            <h1 className={`${styles.title}`}>Building Management</h1>
+            <h2 className={`${styles.subtitle}`}>Welcome to our management application</h2>
+            <p className={`${styles.paragraph}`}>
               This helps you stay updated about our building’s events/issues.
             </p>
             <div className="flex flex-col gap-4 items-start">
               <Link
                 href="/strata-management"
-                className={`rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-blue-500 text-white gap-2 hover:bg-blue-700 font-medium text-sm sm:text-base h-12 sm:h-14 px-6 sm:px-8 sm:w-auto ${styles.button}`}
+                className={`${styles.button}`}
               >
                 Login once every week to check for notifications.
               </Link>
               <Link
                 href="/docs"
-                className={`rounded-full border border-solid border-gray-300 dark:border-gray-700 transition-colors flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-800 hover:border-transparent font-medium text-sm sm:text-base h-12 sm:h-14 px-6 sm:px-8 w-full sm:w-auto md:w-[158px] ${styles.button}`}
+                className={`${styles.button}`}
               >
                 Read our docs
               </Link>
@@ -108,13 +116,13 @@ export default function Home() {
         <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
           <Link
             href="/inquiries"
-            className={`rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-blue-500 text-white gap-2 hover:bg-blue-700 font-medium text-lg h-12 sm:h-14 px-6 sm:px-8 ${styles.button}`}
+            className={`${styles.button}`}
           >
             Inquiries
           </Link>
           <Link
             href="/notifications"
-            className={`rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-blue-500 text-white gap-2 hover:bg-blue-700 font-medium text-lg h-12 sm:h-14 px-6 sm:px-8 ${styles.button}`}
+            className={`${styles.button}`}
           >
             Notifications
           </Link>
@@ -137,4 +145,6 @@ export default function Home() {
       )}
     </div>
   );
-}
+};
+
+export default Home;

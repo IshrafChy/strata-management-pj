@@ -1,110 +1,61 @@
-/* Default Light Mode Styles */
-
-/* Define CSS variables within light-mode class */
+/* Light Mode Styling */
 .light-mode {
   --background-light: #ffffff;
   --foreground-light: #171717;
-  --primary-light: #0070f3;
-  --secondary-light: #005bb5;
+  --primary-light: #1e90ff;   /* Updated primary color for title */
+  --secondary-light: #ff6347;  /* Updated secondary color for subtitle */
+  --button-background-light: #0070f3;
+  --button-hover-light: #005bb5;
   --text-light: #666;
   --text-dark: #333;
 }
 
-/* Light Mode Styling */
-.light-mode {
-  background-color: var(--background-light);
-  color: var(--foreground-light);
-}
-
-/* Title and text styling */
+/* Separate styles for the text content */
 .title {
-  color: var(--primary-light);
-  font-size: 3em; /* Increased title size */
+  color: var(--primary-light);  /* Updated title color */
+  font-size: 4rem;               /* Increased title size */
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
   margin-bottom: 20px;
 }
 
 .subtitle {
-  color: var(--text-dark);
-  font-size: 1.5em;
+  color: var(--secondary-light); /* Updated subtitle color */
+  font-size: 2.5rem;              /* Increased subtitle size */
+  font-family: 'Georgia', serif;  /* A more classic font */
   margin-bottom: 15px;
 }
 
 .paragraph {
   color: var(--text-light);
-  font-size: 1em;
+  font-size: 1.2rem;
   line-height: 1.6;
   margin-bottom: 20px;
+  font-family: 'Courier New', monospace; /* A more distinct font */
 }
 
 /* Button Styling */
 .button {
-  background-color: var(--primary-light);
+  background-color: var(--button-background-light);
   color: white;
-  padding: 10px 20px;
+  padding: 12px 24px;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-weight: 600;
+  font-size: 1.2rem;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .button:hover {
-  background-color: var(--secondary-light);
+  background-color: var(--button-hover-light);
+  transform: scale(1.05);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
 }
 
-.image {
-  max-width: 100%;
-  height: auto;
-  border-radius: 10px;
-  margin-top: 20px;
-}
-
-/* Flexbox container and items */
-.flex-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.flex-item {
-  flex: 1;
-  margin: 10px;
-}
-
-/* Dark Mode Styles */
-.dark-mode {
-  --background-dark: #0a0a0a;
-  --foreground-dark: #ededed;
-  --primary-dark: #1e90ff;
-  --secondary-dark: #ff6347;
-  --text-dark: #cccccc;
-}
-
-/* Dark Mode */
-.dark-mode {
-  background-color: var(--background-dark);
-  color: var(--foreground-dark);
-}
-
-/* Title and text in dark mode */
-.dark-mode .title {
-  color: var(--primary-dark); /* Light blue for dark mode */
-}
-
-.dark-mode .subtitle {
-  color: var(--foreground-dark); /* Light text for dark mode */
-}
-
-.dark-mode .paragraph {
-  color: var(--text-dark); /* Lighter text for dark mode */
-}
-
-/* Dark Mode Button Styling */
-.dark-mode .button {
-  background-color: var(--primary-dark);
-  color: white;
-}
-
-.dark-mode .button:hover {
-  background-color: var(--secondary-dark); /* Tomato color for hover */
+.button:active {
+  background-color: var(--button-hover-light);
+  transform: scale(0.98);
 }
