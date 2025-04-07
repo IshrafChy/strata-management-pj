@@ -1,17 +1,38 @@
 // components/Navbar.js
-import Link from 'next/link';
+import { useState, useEffect } from 'react';
 
 export default function Navbar() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    // Check if dark mode is enabled based on environment variable
+    const isEnabled = process.env.NEXT_PUBLIC_ENABLE_DARK_MODE === 'true';
+    setIsDarkMode(isEnabled);
+  }, []);
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(prevMode => !prevMode);
+  };
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.body.classList.add('dark-mode');
+      document.body.classList.remove('light-mode');
+    } else {
+      document.body.classList.add('light-mode');
+      document.body.classList.remove('dark-mode');
+    }
+  }, [isDarkMode]);
+
   return (
     <nav className="flex justify-between items-center p-4 bg-gray-800 text-white shadow-md">
-      <div className="text-2xl font-bold">Quest</div>
-      <ul className="flex space-x-4">
-        <li><Link href="/">Home</Link></li>
-        <li><Link href="/about">About</Link></li>
-        <li><Link href="/courses">Courses</Link></li>
-        <li><Link href="/pages">Pages</Link></li>
-        <li><Link href="/blog">Blog</Link></li>
-      </ul>
+      {/* Dark Mode Toggle Button */}
+      <button 
+        onClick={toggleDarkMode} 
+        className="text-lg bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded"
+      >
+        {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+      </button>
     </nav>
   );
 }

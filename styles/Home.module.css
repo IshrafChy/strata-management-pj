@@ -1,30 +1,44 @@
-/* styles/Home.module.css */
-.container {
-  padding: 20px;
-  text-align: center;
+/* Default Light Mode Styles */
+
+/* Define CSS variables within light-mode class */
+.light-mode {
+  --background-light: #ffffff;
+  --foreground-light: #171717;
+  --primary-light: #0070f3;
+  --secondary-light: #005bb5;
+  --text-light: #666;
+  --text-dark: #333;
 }
 
+/* Light Mode Styling */
+.light-mode {
+  background-color: var(--background-light);
+  color: var(--foreground-light);
+}
+
+/* Title and text styling */
 .title {
-  color: #0070f3;
+  color: var(--primary-light);
   font-size: 3em; /* Increased title size */
   margin-bottom: 20px;
 }
 
 .subtitle {
-  color: #333;
+  color: var(--text-dark);
   font-size: 1.5em;
   margin-bottom: 15px;
 }
 
 .paragraph {
-  color: #666;
+  color: var(--text-light);
   font-size: 1em;
   line-height: 1.6;
   margin-bottom: 20px;
 }
 
+/* Button Styling */
 .button {
-  background-color: #0070f3;
+  background-color: var(--primary-light);
   color: white;
   padding: 10px 20px;
   border: none;
@@ -34,7 +48,7 @@
 }
 
 .button:hover {
-  background-color: #005bb5;
+  background-color: var(--secondary-light);
 }
 
 .image {
@@ -44,6 +58,7 @@
   margin-top: 20px;
 }
 
+/* Flexbox container and items */
 .flex-container {
   display: flex;
   justify-content: space-between;
@@ -54,4 +69,42 @@
 .flex-item {
   flex: 1;
   margin: 10px;
+}
+
+/* Dark Mode Styles */
+.dark-mode {
+  --background-dark: #0a0a0a;
+  --foreground-dark: #ededed;
+  --primary-dark: #1e90ff;
+  --secondary-dark: #ff6347;
+  --text-dark: #cccccc;
+}
+
+/* Dark Mode */
+.dark-mode {
+  background-color: var(--background-dark);
+  color: var(--foreground-dark);
+}
+
+/* Title and text in dark mode */
+.dark-mode .title {
+  color: var(--primary-dark); /* Light blue for dark mode */
+}
+
+.dark-mode .subtitle {
+  color: var(--foreground-dark); /* Light text for dark mode */
+}
+
+.dark-mode .paragraph {
+  color: var(--text-dark); /* Lighter text for dark mode */
+}
+
+/* Dark Mode Button Styling */
+.dark-mode .button {
+  background-color: var(--primary-dark);
+  color: white;
+}
+
+.dark-mode .button:hover {
+  background-color: var(--secondary-dark); /* Tomato color for hover */
 }
