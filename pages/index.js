@@ -113,6 +113,12 @@ const Home = () => {
               >
                 Redirect Test
               </Link>
+              <Link
+                href="/api-test"
+                className="px-6 py-3 rounded-lg bg-purple-700 text-white font-bold shadow-lg hover:bg-purple-800 transition-all duration-200 border-2 border-transparent hover:border-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+              >
+                API Test
+              </Link>
             </div>
           </div>
           <div className="sm:w-1/2 mt-8 sm:mt-0 flex justify-center">
