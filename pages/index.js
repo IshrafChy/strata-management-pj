@@ -86,20 +86,32 @@ const Home = () => {
             <h1 className={`${styles.title}`}>Building Management</h1>
             <h2 className={`${styles.subtitle}`}>Welcome to our management application</h2>
             <p className={`${styles.paragraph}`}>
-              This helps you stay updated about our building’s events/issues.
+              This helps you stay updated about our building's events/issues.
             </p>
             <div className="flex flex-col gap-4 items-start">
               <Link
                 href="/strata-management"
-                className={`${styles.button}`}
+                className="px-6 py-3 rounded-lg bg-indigo-500 text-white font-bold shadow-lg hover:bg-indigo-600 transition-all duration-200 border-2 border-transparent hover:border-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
               >
                 Login once every week to check for notifications.
               </Link>
               <Link
                 href="/docs"
-                className={`${styles.button}`}
+                className="px-6 py-3 rounded-lg bg-indigo-500 text-white font-bold shadow-lg hover:bg-indigo-600 transition-all duration-200 border-2 border-transparent hover:border-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
               >
                 Read our docs
+              </Link>
+              <Link
+                href="/http-demo"
+                className="px-6 py-3 rounded-lg bg-teal-600 text-white font-bold shadow-lg hover:bg-teal-700 transition-all duration-200 border-2 border-transparent hover:border-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+              >
+                HTTP Demo
+              </Link>
+              <Link
+                href="/redirect-test"
+                className="px-6 py-3 rounded-lg bg-blue-700 text-white font-bold shadow-lg hover:bg-blue-800 transition-all duration-200 border-2 border-transparent hover:border-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+              >
+                Redirect Test
               </Link>
             </div>
           </div>
@@ -116,13 +128,13 @@ const Home = () => {
         <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
           <Link
             href="/inquiries"
-            className={`${styles.button}`}
+            className="px-6 py-3 rounded-lg bg-indigo-500 text-white font-bold shadow-lg hover:bg-indigo-600 transition-all duration-200 border-2 border-transparent hover:border-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
           >
             Inquiries
           </Link>
           <Link
             href="/notifications"
-            className={`${styles.button}`}
+            className="px-6 py-3 rounded-lg bg-indigo-500 text-white font-bold shadow-lg hover:bg-indigo-600 transition-all duration-200 border-2 border-transparent hover:border-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
           >
             Notifications
           </Link>

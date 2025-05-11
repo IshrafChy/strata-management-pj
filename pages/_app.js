@@ -1,5 +1,7 @@
 import "@/styles/globals.css"; // Import global CSS
 import { useEffect, useState } from "react";
+import { NotificationProvider } from '../context/NotificationContext';
+import NotificationToast from '../components/NotificationToast';
 
 export default function App({ Component, pageProps }) {
   // State to manage dark mode
@@ -28,13 +30,16 @@ export default function App({ Component, pageProps }) {
   }, [isDarkMode]);
 
   return (
-    <>
-      {/* Button to toggle dark mode */}
-      <button onClick={toggleDarkMode} className="theme-toggle-btn">
-        Toggle Dark Mode
-      </button>
+    <NotificationProvider>
+      <NotificationToast />
+      <div>
+        {/* Button to toggle dark mode */}
+        <button onClick={toggleDarkMode} className="theme-toggle-btn">
+          Toggle Dark Mode
+        </button>
+      </div>
       {/* Render the component */}
       <Component {...pageProps} />
-    </>
+    </NotificationProvider>
   );
 }
