@@ -86,7 +86,7 @@ const Home = () => {
             <h1 className={`${styles.title}`}>Building Management</h1>
             <h2 className={`${styles.subtitle}`}>Welcome to our management application</h2>
             <p className={`${styles.paragraph}`}>
-              This helps you stay updated about our building's events/issues.
+              This helps you stay updated about our building&apos;s events/issues.
             </p>
             <div className="flex flex-col gap-4 items-start">
               <Link
