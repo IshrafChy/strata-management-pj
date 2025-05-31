@@ -1,25 +1,23 @@
 <?php
 session_start();
 
-require_once __DIR__ . '/config/database.php';
+// Database connection removed for static demo
+// require_once __DIR__ . '/config/database.php';
 
-// Check if user is logged in
+// Check if user is logged in (based on static cookie)
 if (!isset($_COOKIE['user_id'])) {
     header('Location: /api/login.php'); // Updated redirect path
     exit();
 }
 
-$user_id = $_COOKIE['user_id'];
+$user_id = $_COOKIE['user_id']; // Still get the cookie value for demonstration
 
-// Fetch number of open maintenance requests using pg_query
-$query = 'SELECT COUNT(*) AS open_requests FROM maintenance_requests WHERE status = \'Open\'';
-$result = pg_query($dbconn, $query);
+// Database query removed for static demo
+// $query = 'SELECT COUNT(*) AS open_requests FROM maintenance_requests WHERE status = \'Open\'';
+// $result = pg_query($dbconn, $query);
+// ... fetch logic ...
 
-$open_requests_count = 0;
-if ($result) {
-    $row = pg_fetch_assoc($result);
-    $open_requests_count = $row['open_requests'] ?? 0;
-}
+$open_requests_count = "(Static Count)"; // Static placeholder
 
 ?>
 
@@ -28,14 +26,14 @@ if ($result) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strata Management Dashboard</title>
+    <title>Strata Management Dashboard (Static)</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto px-4 py-8">
-        <h1 class="text-3xl font-bold mb-6">Strata Management Dashboard</h1>
+        <h1 class="text-3xl font-bold mb-6">Strata Management Dashboard (Static Demo)</h1>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg::grid-cols-3 gap-6">
             <!-- Maintenance Requests -->
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <h2 class="text-xl font-semibold mb-4">Maintenance Requests</h2>

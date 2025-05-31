@@ -1,26 +1,23 @@
 <?php
 session_start();
 
-require_once __DIR__ . '/config/database.php';
+// Database connection removed for static demo
+// require_once __DIR__ . '/config/database.php';
 
-// Check if user is logged in
+// Check if user is logged in (based on static cookie)
 if (!isset($_COOKIE['user_id'])) {
     header('Location: /api/login.php'); // Updated redirect path
     exit();
 }
 
-$user_id = $_COOKIE['user_id'];
+$user_id = $_COOKIE['user_id']; // Still get the cookie value for demonstration
 
-// Fetch maintenance requests using pg_query
-$query = 'SELECT * FROM maintenance_requests ORDER BY request_date DESC';
-$result = pg_query($dbconn, $query);
+// Database query removed for static demo
+// $query = 'SELECT * FROM maintenance_requests ORDER BY request_date DESC';
+// $result = pg_query($dbconn, $query);
+// ... fetch logic ...
 
-$requests = [];
-if ($result) {
-    while ($row = pg_fetch_assoc($result)) {
-        $requests[] = $row;
-    }
-}
+$requests = []; // Empty array for static demo
 
 ?>
 
@@ -29,12 +26,12 @@ if ($result) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maintenance Requests</title>
+    <title>Maintenance Requests (Static)</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto px-4 py-8">
-        <h1 class="text-3xl font-bold mb-6">Maintenance Requests</h1>
+        <h1 class="text-3xl font-bold mb-6">Maintenance Requests (Static Demo)</h1>
 
         <a href="/api/strata-dashboard.php" class="text-blue-500 hover:underline mb-6 inline-block">Back to Dashboard</a>
         
@@ -54,7 +51,7 @@ if ($result) {
                 </ul>
             </div>
         <?php else: ?>
-            <p class="text-gray-600">No maintenance requests found.</p>
+            <p class="text-gray-600">No maintenance requests found (Static Demo).</p>
         <?php endif; ?>
     </div>
 </body>
