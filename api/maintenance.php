@@ -5,16 +5,22 @@ require_once __DIR__ . '/config/database.php';
 
 // Check if user is logged in
 if (!isset($_COOKIE['user_id'])) {
-    header('Location: /login.php'); // Update redirect path
+    header('Location: /api/login.php'); // Updated redirect path
     exit();
 }
 
 $user_id = $_COOKIE['user_id'];
 
-// Fetch maintenance requests
-$stmt = $pdo->prepare('SELECT * FROM maintenance_requests ORDER BY request_date DESC');
-$stmt->execute();
-$requests = $stmt->fetchAll();
+// Fetch maintenance requests using pg_query
+$query = 'SELECT * FROM maintenance_requests ORDER BY request_date DESC';
+$result = pg_query($dbconn, $query);
+
+$requests = [];
+if ($result) {
+    while ($row = pg_fetch_assoc($result)) {
+        $requests[] = $row;
+    }
+}
 
 ?>
 

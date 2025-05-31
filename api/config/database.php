@@ -3,23 +3,27 @@
 $db_config = [
     'host' => getenv('DB_HOST') ?: 'localhost',
     'dbname' => getenv('DB_NAME') ?: 'strata_management',
-    'username' => getenv('DB_USER') ?: 'root',
+    'user' => getenv('DB_USER') ?: 'root',
     'password' => getenv('DB_PASSWORD') ?: '',
-    'port' => getenv('DB_PORT') ?: '5432', // Default PostgreSQL port
-    'charset' => 'utf8' // Use utf8 for Postgres
+    'port' => getenv('DB_PORT') ?: '5432' // Default PostgreSQL port
 ];
 
-try {
-    // Use pgsql driver for PostgreSQL
-    $dsn = "pgsql:host={$db_config['host']};port={$db_config['port']};dbname={$db_config['dbname']};user={$db_config['username']};password={$db_config['password']};sslmode=require";
-    $pdo = new PDO($dsn, null, null, [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        PDO::ATTR_EMULATE_PREPARES => false,
-    ]);
-} catch (PDOException $e) {
+// Construct the connection string for pg_connect
+$connection_string = "host={$db_config['host']} port={$db_config['port']} dbname={$db_config['dbname']} user={$db_config['user']} password={$db_config['password']} sslmode=require";
+
+// Attempt to connect using pg_connect
+$dbconn = pg_connect($connection_string);
+
+if (!$dbconn) {
     // Log error and show user-friendly message
-    error_log("Database connection failed: " . $e->getMessage());
+    $error_message = pg_last_error();
+    error_log("Database connection failed: " . $error_message);
     // Temporarily display the detailed error message for debugging
-    die("Database connection failed: " . $e->getMessage());
-} 
+    die("Database connection failed: " . $error_message);
+}
+
+// Store the connection resource if needed elsewhere (optional, depends on further usage)
+// global $dbconn; // Or pass it as an argument to functions
+
+// Note: Queries will now use pg_query(), pg_prepare(), pg_execute(), etc.
+// Example: $result = pg_query($dbconn, 'SELECT * FROM users'); 

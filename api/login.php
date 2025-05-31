@@ -8,13 +8,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    // Validate against the database
-    $stmt = $pdo->prepare('SELECT id, password FROM users WHERE username = :username');
-    $stmt->execute(['username' => $username]);
-    $user = $stmt->fetch();
+    // Escape special characters in username and password for security (basic level)
+    $escaped_username = pg_escape_literal($dbconn, $username);
+    $escaped_password = pg_escape_literal($dbconn, $password);
 
-    // In a real application, you would use password_verify() for hashed passwords
-    if ($user && $password === $user['password']) {
+    // Validate against the database using pg_query
+    // WARNING: Storing plain passwords is insecure. Use password_hash() and password_verify() in a real app.
+    $query = "SELECT id, password FROM users WHERE username = " . $escaped_username . " AND password = " . $escaped_password;
+    $result = pg_query($dbconn, $query);
+
+    if ($result && pg_num_rows($result) > 0) {
+        $user = pg_fetch_assoc($result);
         // Set cookie for 24 hours
         setcookie('user_id', $user['id'], time() + (86400 * 1), '/');
         header('Location: /api/strata-dashboard.php');

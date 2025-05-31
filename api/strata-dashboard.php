@@ -11,10 +11,15 @@ if (!isset($_COOKIE['user_id'])) {
 
 $user_id = $_COOKIE['user_id'];
 
-// Fetch number of open maintenance requests
-$stmt = $pdo->prepare('SELECT COUNT(*) AS open_requests FROM maintenance_requests WHERE status = \'Open\'');
-$stmt->execute();
-$open_requests_count = $stmt->fetchColumn();
+// Fetch number of open maintenance requests using pg_query
+$query = 'SELECT COUNT(*) AS open_requests FROM maintenance_requests WHERE status = \'Open\'';
+$result = pg_query($dbconn, $query);
+
+$open_requests_count = 0;
+if ($result) {
+    $row = pg_fetch_assoc($result);
+    $open_requests_count = $row['open_requests'] ?? 0;
+}
 
 ?>
 
