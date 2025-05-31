@@ -1,14 +1,23 @@
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 export default function MaintenanceRequestsPage() {
   const [maintenanceRequests, setMaintenanceRequests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await fetch('/api/maintenance-requests');
+
+        if (res.status === 401) {
+          // If unauthorized, redirect to login
+          router.push('/login');
+          return;
+        }
+
         const data = await res.json();
 
         if (data.success) {
@@ -25,7 +34,7 @@ export default function MaintenanceRequestsPage() {
     };
 
     fetchData();
-  }, []);
+  }, [router]); // Added router to dependency array
 
   if (loading) {
     return <div className="min-h-screen flex items-center justify-center">Loading...</div>;

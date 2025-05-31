@@ -1,4 +1,5 @@
 import pool from '../../lib/db';
+import Cookies from 'cookies';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
@@ -10,9 +11,12 @@ export default async function handler(req, res) {
 
       if (result.rows.length > 0) {
         const user = result.rows[0];
-        // In a real application, you would set a secure HTTP-only cookie or a session token here
-        // For this demo, we'll just return success status
-        res.status(200).json({ success: true, userId: user.id });
+
+        const cookies = new Cookies(req, res);
+        // Set a cookie named 'auth_token' with the user ID, make it HTTP-only for security
+        cookies.set('auth_token', user.id.toString(), { httpOnly: true, path: '/', sameSite: 'lax' }); // Set path to / to make it available everywhere
+
+        res.status(200).json({ success: true });
       } else {
         res.status(401).json({ success: false, message: 'Invalid credentials' });
       }
