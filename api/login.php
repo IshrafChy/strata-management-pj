@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($user && $password === $user['password']) {
         // Set cookie for 24 hours
         setcookie('user_id', $user['id'], time() + (86400 * 1), '/');
-        header('Location: /strata-dashboard.php');
+        header('Location: /api/strata-dashboard.php');
         exit();
     } else {
         $error = 'Invalid username or password';

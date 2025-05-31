@@ -5,7 +5,7 @@ require_once __DIR__ . '/config/database.php';
 
 // Check if user is logged in
 if (!isset($_COOKIE['user_id'])) {
-    header('Location: /login.php');
+    header('Location: /login.php'); // Update redirect path
     exit();
 }
 
@@ -30,7 +30,7 @@ $requests = $stmt->fetchAll();
     <div class="container mx-auto px-4 py-8">
         <h1 class="text-3xl font-bold mb-6">Maintenance Requests</h1>
 
-        <a href="/strata-dashboard.php" class="text-blue-500 hover:underline mb-6 inline-block">Back to Dashboard</a>
+        <a href="/api/strata-dashboard.php" class="text-blue-500 hover:underline mb-6 inline-block">Back to Dashboard</a>
         
         <?php if (count($requests) > 0): ?>
             <div class="bg-white p-6 rounded-lg shadow-md">
