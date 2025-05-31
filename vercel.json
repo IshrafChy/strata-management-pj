@@ -32,11 +32,5 @@
   ],
   "env": {
     "NEXT_PUBLIC_API_URL": "https://api.your-domain.com"
-  },
-  "builds": [
-    {
-      "src": "php/**/*.php",
-      "use": "@vercel/php"
-    }
-  ]
-} 
+  }
+}
