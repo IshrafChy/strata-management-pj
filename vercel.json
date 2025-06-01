@@ -5,6 +5,11 @@
   "installCommand": "npm install",
   "framework": "nextjs",
   "regions": ["syd1"],
+  "functions": {
+    "api/**/*.php": {
+      "runtime": "vercel-php@0.7.3"
+    }
+  },
   "crons": [
     {
       "path": "/api/cron/cleanup",
