@@ -13,6 +13,15 @@
   ],
   "headers": [
     {
+      "source": "/static-info.php",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/html"
+        }
+      ]
+    },
+    {
       "source": "/(.*)",
       "headers": [
         {
