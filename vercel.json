@@ -44,8 +44,5 @@
       "source": "/api/strata-dashboard",
       "destination": "/api/strata-dashboard-api.php"
     }
-  ],
-  "build": {
-    "ignore": "strata-dashboard.php"
-  }
+  ]
 }
