@@ -11,16 +11,18 @@
       "schedule": "0 0 * * *"
     }
   ],
-  "headers": [
+  "functions": {
+    "php/hello.php": {
+      "runtime": "vercel-php@0.6.0"
+    }
+  },
+  "rewrites": [
     {
-      "source": "/static-info.php",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/html"
-        }
-      ]
-    },
+      "source": "/api/hello.php",
+      "destination": "/php/hello.php"
+    }
+  ],
+  "headers": [
     {
       "source": "/(.*)",
       "headers": [
