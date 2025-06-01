@@ -37,5 +37,15 @@
   ],
   "env": {
     "NEXT_PUBLIC_API_URL": "https://api.your-domain.com"
+  },
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/api/strata-dashboard",
+      "destination": "/api/strata-dashboard-api.php"
+    }
+  ],
+  "build": {
+    "ignore": "strata-dashboard.php"
   }
 }
