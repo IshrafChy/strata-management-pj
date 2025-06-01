@@ -11,17 +11,6 @@
       "schedule": "0 0 * * *"
     }
   ],
-  "functions": {
-    "php/hello.php": {
-      "runtime": "vercel-php@0.6.0"
-    }
-  },
-  "rewrites": [
-    {
-      "source": "/api/hello.php",
-      "destination": "/php/hello.php"
-    }
-  ],
   "headers": [
     {
       "source": "/(.*)",
