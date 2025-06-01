@@ -12,10 +12,16 @@
     }
   ],
   "functions": {
-    "api/info.php": {
+    "php/info.php": {
       "runtime": "vercel-php@0.6.0"
     }
   },
+  "rewrites": [
+    {
+      "source": "/api/info.php",
+      "destination": "/php/info.php"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
